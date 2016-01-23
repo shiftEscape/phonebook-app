@@ -42,6 +42,18 @@ describe('ContactsController', function() {
 			.expect(STATUS_SUCCESS)
 			.expect(expectedResult, done);
 	    });
+
+	    it('should redirect to /contact with Missing contact name and number', function (done) {
+	   	  var missingContact = { contact_name: '', contact_num: '' },
+	   	  	expectedResult = 'Missing contact details';
+
+	      request(sails.hooks.http.app)
+	        .post('/contacts')
+	        .send(missingContact)
+	        .expect('Content-Type', /text/)
+			.expect(STATUS_SUCCESS)
+			.expect(expectedResult, done);
+	    });
     });
   });
 
