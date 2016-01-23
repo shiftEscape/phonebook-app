@@ -37,7 +37,8 @@ module.exports.routes = {
   },
   '/contact': {
     view: 'contact'
-  }
+  },
+  'post /contacts': 'ContactsController.save'
 
   /***************************************************************************
   *                                                                          *
