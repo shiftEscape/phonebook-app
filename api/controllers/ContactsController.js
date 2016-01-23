@@ -1,11 +1,18 @@
+function validate(param) {
+	var result = 'Contact saved!';
+
+	if(!param.contact_name && !param.contact_num)
+  		result = "Missing contact details";
+  	else if(!param.contact_name)
+  		result = "Missing contact name";
+  	else if(!param.contact_num)
+  		result = "Missing contact number";
+
+  	return result;
+}
+
 module.exports = {
   save: function (req, res) {
-  	if(!req.body.contact_name && !req.body.contact_num)
-  		return res.send("Missing contact details");
-  	if(!req.body.contact_name)
-  		return res.send("Missing contact name");
-  	if(!req.body.contact_num)
-  		return res.send("Missing contact number");
-    return res.send("Contact saved!");
+  	return res.send(validate(req.body));
   }
 };
