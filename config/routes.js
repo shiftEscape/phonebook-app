@@ -33,13 +33,10 @@ module.exports.routes = {
   ***************************************************************************/
 
   '/': {
-    view: 'homepage'
+    view: 'contact/index'
   },
-  'GET /contact': {
-    view: 'contact'
-  },
-  'POST /contacts': 'ContactsController.save',
-  'PUT /contacts/:id': 'ContactsController.update'
+  'POST /contact': 'ContactsController.save',
+  'PUT /contact/:id': 'ContactsController.update'
 
   /***************************************************************************
   *                                                                          *
