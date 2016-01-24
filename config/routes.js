@@ -36,7 +36,8 @@ module.exports.routes = {
     view: 'contact/index'
   },
   'POST /contact': 'ContactController.save',
-  'PUT /contact/:id': 'ContactController.update'
+  'PUT /contact/:id': 'ContactController.update',
+  'DELETE /contact/:id': 'ContactController.destroy'
 
   /***************************************************************************
   *                                                                          *

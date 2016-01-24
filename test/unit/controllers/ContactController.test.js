@@ -86,4 +86,23 @@ describe('ContactsController', function() {
 
   });
 
+  describe('#destroy()', function() {
+
+    function execRequest(expectedResult, done) {
+      request(sails.hooks.http.app)
+        .delete('/contact/1')
+        .expect('Content-Type', /text/)
+        .expect(STATUS_SUCCESS)
+        .expect(expectedResult, done);
+    }
+
+    describe('with valid param', function() {
+      it('should redirect to /contact with success message after deleting', function (done) {
+        expectedResult = 'Contact deleted!';
+        execRequest(expectedResult, done);
+      });
+    });
+
+  });
+
 });
