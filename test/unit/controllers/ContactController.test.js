@@ -86,6 +86,25 @@ describe('ContactsController', function() {
 
   });
 
+  describe('#get()', function() {
+
+    function execRequest(expectedResult, done) {
+      request(sails.hooks.http.app)
+        .get('/contact')
+        .expect('Content-Type', /text/)
+        .expect(STATUS_SUCCESS)
+        .expect(expectedResult, done);
+    }
+
+    describe('with valid param', function() {
+      it('should return all contacts stored in DB', function (done) {
+        expectedResult = 'All contacts retrieved!';
+        execRequest(expectedResult, done);
+      });
+    });
+
+  });
+
   describe('#destroy()', function() {
 
     function execRequest(expectedResult, done) {
