@@ -5,7 +5,7 @@ function validate(param, action) {
     save: 'Contact saved!',
     update: 'Contact updated!'
   },
-  returnValue = successObj[action];
+    returnValue = successObj[action];
 
   if(!param.contact_name && !param.contact_num)
     returnValue = "Missing contact details";
@@ -15,10 +15,14 @@ function validate(param, action) {
     returnValue = "Missing contact number";
 
   return returnValue;
+
 }
 
 module.exports = {
   save: function (req, res) {
     return res.send(validate(req.body, 'save'));
+  },
+  update: function(req, res) {
+    return res.send(validate(req.body, 'update'));
   }
 };
