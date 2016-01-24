@@ -6,6 +6,7 @@ function validate(param, action) {
     update: 'Contact updated!',
     destroy: 'Contact deleted!',
     getAll: 'All contacts retrieved!',
+    getOne: 'One contact retrieved!',
   },
     returnValue = successObj[action];
 
@@ -28,6 +29,9 @@ module.exports = {
   },
   getAll: function(req, res) {
     res.send(validate(req.params, 'getAll'));
+  },
+  getOne: function(req, res) {
+    res.send(validate(req.params, 'getOne'));
   },
   update: function(req, res) {
     res.send(validate(req.body, 'update'));
