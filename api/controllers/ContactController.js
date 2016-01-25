@@ -28,6 +28,7 @@ function validate(param, action) {
 }
 
 module.exports = {
+
   index: function(req, res, next) {
     Contact.find(function(err, contacts) {
       if(err) return next(err);
@@ -36,6 +37,7 @@ module.exports = {
       });
     });
   },
+
   create: function (req, res, next) {
     var validationResult = validate(req.body, 'create');
 
@@ -51,24 +53,28 @@ module.exports = {
         console.log(err);
         return next(err);
       }
-      res.redirect("/contact/?create=true");
+      res.redirect("/contact/?created=true");
     });
   },
+
   find: function(req, res, next) {
     res.send(validate(req.params, 'find'));
   },
+
   findOne: function(req, res, next) {
     res.send(validate(req.params, 'findOne'));
   },
+
   show: function(req, res, next) {
     Contact.findOne(req.params['id'], function(err, contact) {
       if(err) return next(err);
-      if(!contact) return next('User doesn\'t exists!');
+      if(!contact) return res.redirect('/contact')
       res.view({
         contact: contact
       });
     });
   },
+
   edit: function(req, res, next) {
     Contact.findOne(req.params['id'], function(err, contact) {
       if(err) return next(err);
@@ -78,6 +84,7 @@ module.exports = {
       });
     });
   },
+
   update: function(req, res, next) {
     var validationResult = validate(req.body, 'update'),
       paramID = req.params['id'];
@@ -90,11 +97,13 @@ module.exports = {
       res.redirect('/contact/show/' + paramID);
     });
   },
+
   destroy: function(req, res, next) {
     var paramID = req.params['id'];
+
     Contact.findOne(paramID, function(errFind, contact) {
       if(errFind) return next(errFind);
-      if(!contact) return next('User doesn\'t exists!');
+      if(!contact) return res.redirect('/contact')
 
       Contact.destroy(paramID, function(errDestroy) {
         if(errDestroy) return next(errDestroy);

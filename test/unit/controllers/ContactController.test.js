@@ -27,8 +27,8 @@ describe('ContactController', function() {
     describe('with valid params', function() {
       it('should redirect to /contact page after successful creation of contact', function (done) {
         var validParam = { name: factoryData.name, number: factoryData.number },
-          expectedResult = 'Found. Redirecting to /contact/?create=true',
-          headerParams = {url: '/contact/create', location: '/contact/?create=true', contentType: 'text', status: STATUS_REDIRECT};
+          expectedResult = 'Found. Redirecting to /contact/?created=true',
+          headerParams = {url: '/contact/create', location: '/contact/?created=true', contentType: 'text', status: STATUS_REDIRECT};
         execRequestSave(validParam, expectedResult, headerParams, done);
       });
     });
