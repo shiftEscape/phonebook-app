@@ -34,12 +34,7 @@ module.exports.routes = {
 
   '/': {
     view: 'static/home'
-  },
-  'POST /contact': 'ContactController.save',
-  'GET /contact': 'ContactController.getAll',
-  'GET /contact/:id': 'ContactController.getOne',
-  'PUT /contact/:id': 'ContactController.update',
-  'DELETE /contact/:id': 'ContactController.destroy'
+  }
 
   /***************************************************************************
   *                                                                          *
