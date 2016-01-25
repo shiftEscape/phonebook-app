@@ -6,8 +6,11 @@
       <h5 style="margin: 0"> <%= contact.number %> </h5>
       <br><br><br>
       <a class="btn btn-success btn-sm" href="/contact/edit/<%= contact.id %>">Edit Info</a>
-      <form style="display: inline-block" action="/contact/<%= contact.id %>" method="post">
+      <form style="display: inline-block" action="/contact/destroy/<%= contact.id %>" method="POST" onsubmit="return confirm('Remove \'<%= contact.name%>\' from your contacts?');">
+        <input type="hidden" name="_method" value="delete">
         <input type="submit" class="btn btn-danger btn-sm" value="Delete">
+        &nbsp;&nbsp;
+        <a href="/contact"><< Back to contact list</a>
       </form>
     </div>
   </div>
