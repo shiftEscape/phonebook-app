@@ -12,6 +12,7 @@ describe('ContactsController', function() {
         .post(headers.url)
         .send(param)
         .expect('Content-Type', new RegExp(headers.contentType))
+        .expect('Location', headers.location)
         .expect(headers.status)
         .expect(expectedResult, done);
     }
@@ -19,28 +20,28 @@ describe('ContactsController', function() {
     describe('with valid params', function() {
       it('should return a success message after contact creation', function (done) {
         var validParam = { name: 'test', number: '123' },
-          expectedResult = 'Found. Redirecting to /contact';
-        execRequestSave(validParam, expectedResult, {url: '/contact/create', contentType: 'text', status: 302}, done);
+          expectedResult = 'Found. Redirecting to /contact/?create=true';
+        execRequestSave(validParam, expectedResult, {url: '/contact/create', location: '/contact/?create=true', contentType: 'text', status: 302}, done);
       });
     });
 
     describe('with missing params', function() {
       it('should return an error if contact name is missing', function (done) {
         var missingContactName = { name: '', number: '12345' },
-          expectedResult = {status: false, message: 'Missing contact name'};
-        execRequestSave(missingContactName, expectedResult, {url: '/contact/create', contentType: 'json', status: 200}, done);
+          expectedResult = 'Found. Redirecting to /contact/?valid=false';
+        execRequestSave(missingContactName, expectedResult, {url: '/contact/create', location: '/contact/?valid=false', contentType: 'text', status: 302}, done);
       });
 
       it('should return an error if contact number is missing', function (done) {
         var missingContactNumber = { name: 'Joe Joey', number: '' },
-          expectedResult = {status: false, message: 'Missing contact number'};
-        execRequestSave(missingContactNumber, expectedResult, {url: '/contact/create', contentType: 'json', status: 200}, done);
+          expectedResult = 'Found. Redirecting to /contact/?valid=false';
+        execRequestSave(missingContactNumber, expectedResult, {url: '/contact/create', location: '/contact/?valid=false', contentType: 'text', status: 302}, done);
       });
 
       it('should return an error if contact name and number are missing', function (done) {
         var missingContact = { name: '', number: '' },
-          expectedResult = {status: false, message: 'Missing contact details'};
-        execRequestSave(missingContact, expectedResult, {url: '/contact/create', contentType: 'json', status: 200}, done);
+          expectedResult = 'Found. Redirecting to /contact/?valid=false';
+        execRequestSave(missingContact, expectedResult, {url: '/contact/create', location: '/contact/?valid=false', contentType: 'text', status: 302}, done);
       });
     });
 

@@ -38,12 +38,20 @@ module.exports = {
   },
   create: function (req, res, next) {
     var validationResult = validate(req.body, 'create');
-    if(!validationResult.status)
-      return res.send(validationResult);
+
+    if(!validationResult.status) {
+      req.session.flash = {
+        err: validationResult.message
+      };
+      return res.redirect('/contact/?valid=false');
+    }
 
     Contact.create(req.params.all(), function(err, createdUser) {
-      if(err) return next(err);
-      res.redirect("/contact");
+      if(err) {
+        console.log(err);
+        return next(err);
+      }
+      res.redirect("/contact/?create=true");
     });
   },
   find: function(req, res, next) {
