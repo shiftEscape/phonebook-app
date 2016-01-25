@@ -3,7 +3,7 @@ function validate(param, action) {
   // Use defined obj to handle (default) positive messages
   var successObj = {
     create: {status: true, message: 'Contact successfully saved!'},
-    update: 'Contact updated!',
+    update: {status: true, message: 'Contact successfully updated!'},
     destroy: 'Contact deleted!',
     find: 'All contacts retrieved!',
     findOne: 'One contact retrieved!',
@@ -71,7 +71,16 @@ module.exports = {
     });
   },
   update: function(req, res, next) {
-    res.send(validate(req.body, 'update'));
+    var validationResult = validate(req.body, 'update'),
+      paramID = req.params['id'];
+    if(!validationResult.status)
+      return res.send(validationResult);
+
+    Contact.update(paramID, req.params.all(), function(err) {
+      if(err)
+        return res.redirect('/contact/edit/' + paramID);
+      res.redirect('/contact/show/' + paramID);
+    });
   },
   destroy: function(req, res, next) {
     res.send(validate(req.params, 'destroy'));
