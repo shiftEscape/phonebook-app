@@ -55,7 +55,7 @@ module.exports = {
   show: function(req, res, next) {
     Contact.findOne(req.params['id'], function(err, contact) {
       if(err) return next(err);
-      if(!contact) return next();
+      if(!contact) return next('User doesn\'t exists!');
       res.view({
         contact: contact
       });
@@ -64,7 +64,7 @@ module.exports = {
   edit: function(req, res, next) {
     Contact.findOne(req.params['id'], function(err, contact) {
       if(err) return next(err);
-      if(!contact) return next();
+      if(!contact) return next('User doesn\'t exists!');
       res.view({
         contact: contact
       });
@@ -86,7 +86,7 @@ module.exports = {
     var paramID = req.params['id'];
     Contact.findOne(paramID, function(errFind, contact) {
       if(errFind) return next(errFind);
-      if(!contact) return next();
+      if(!contact) return next('User doesn\'t exists!');
 
       Contact.destroy(paramID, function(errDestroy) {
         if(errDestroy) return next(errDestroy);
