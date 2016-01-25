@@ -80,20 +80,20 @@ describe('ContactController', function() {
     describe('with missing params', function() {
       it('should return an error if contact name is missing', function (done) {
         var missingContactName = { name: '', number: factoryData.number },
-          expectedResult = {status: false, message: 'Missing contact name'};
-        execRequestUpdate(missingContactName, expectedResult, {url: '/contact/update/1', contentType: 'json', status: STATUS_SUCCESS}, done);
+          expectedResult = 'Found. Redirecting to /contact/edit/1';
+        execRequestUpdate(missingContactName, expectedResult, {url: '/contact/update/1', contentType: 'text', status: STATUS_REDIRECT}, done);
       });
 
       it('should return an error if contact number is missing', function (done) {
         var missingContactNumber = { name: factoryData.name, number: '' },
-          expectedResult = {status: false, message: 'Missing contact number'};
-        execRequestUpdate(missingContactNumber, expectedResult, {url: '/contact/update/1', contentType: 'json', status: STATUS_SUCCESS}, done);
+          expectedResult = 'Found. Redirecting to /contact/edit/1';
+        execRequestUpdate(missingContactNumber, expectedResult, {url: '/contact/update/1', contentType: 'text', status: STATUS_REDIRECT}, done);
       });
 
       it('should return an error if contact name and number are missing', function (done) {
         var missingContact = { name: '', number: '' },
-          expectedResult = {status: false, message: 'Missing contact details'};
-        execRequestUpdate(missingContact, expectedResult, {url: '/contact/update/1', contentType: 'json', status: STATUS_SUCCESS}, done);
+          expectedResult = 'Found. Redirecting to /contact/edit/1';
+        execRequestUpdate(missingContact, expectedResult, {url: '/contact/update/1', contentType: 'text', status: STATUS_REDIRECT}, done);
       });
     });
 
