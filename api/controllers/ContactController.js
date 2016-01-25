@@ -2,7 +2,7 @@ function validate(param, action) {
 
   // Use defined obj to handle (default) positive messages
   var successObj = {
-    create: 'Contact saved!',
+    create: {status: true, message: 'Contact successfully saved!'},
     update: 'Contact updated!',
     destroy: 'Contact deleted!',
     find: 'All contacts retrieved!',
@@ -11,12 +11,16 @@ function validate(param, action) {
     returnValue = successObj[action];
 
   if(action === 'create' || action === 'update') {
-    if(!param.contact_name && !param.contact_num)
-      returnValue = "Missing contact details";
-    else if(!param.contact_name)
-      returnValue = "Missing contact name";
-    else if(!param.contact_num)
-      returnValue = "Missing contact number";
+    if(!param.name && !param.number) {
+      returnValue.status = false;
+      returnValue.message = "Missing contact details";
+    } else if(!param.name) {
+      returnValue.status = false;
+      returnValue.message = "Missing contact name";
+    } else if(!param.number) {
+      returnValue.status = false;
+      returnValue.message = "Missing contact number";
+    }
   }
 
   return returnValue;
