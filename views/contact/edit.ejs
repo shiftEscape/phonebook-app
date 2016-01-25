@@ -1,5 +1,12 @@
 <div class="container">
   <div class="jumbotron row" style="margin-top: 30px">
+    <% if(flash && flash.err) { %>
+      <div class="row">
+        <div class="alert alert-danger col-sm-12">
+          <strong>Oops!</strong>&nbsp;<%= flash.err %>. Please check missing fields and try again.
+        </div>
+      </div>
+    <% } %>
     <img class="col-md-2" src="/images/default_avatar.png">
     <div class="col-md-5" style="display: inline-block; vertical-align: top">
       <form style="display: inline-block" action="/contact/update/<%= contact.id %>" method="POST">

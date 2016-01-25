@@ -88,8 +88,13 @@ module.exports = {
   update: function(req, res, next) {
     var validationResult = validate(req.body, 'update'),
       paramID = req.params['id'];
-    if(!validationResult.status)
-      return res.send(validationResult);
+
+    if(!validationResult.status) {
+      req.session.flash = {
+        err: validationResult.message
+      };
+      return res.redirect('/contact/edit/' + paramID);
+    }
 
     Contact.update(paramID, req.params.all(), function(err) {
       if(err)
