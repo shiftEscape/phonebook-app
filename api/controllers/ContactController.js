@@ -28,6 +28,14 @@ function validate(param, action) {
 }
 
 module.exports = {
+  index: function(req, res, next) {
+    Contact.find(function(err, contacts) {
+      if(err) return next(err);
+      res.view({
+        contacts: contacts
+      });
+    });
+  },
   create: function (req, res) {
     res.send(validate(req.body, 'create'));
   },
