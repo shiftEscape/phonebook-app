@@ -61,6 +61,15 @@ module.exports = {
       });
     });
   },
+  edit: function(req, res) {
+    Contact.findOne(req.params['id'], function(err, contact) {
+      if(err) return next(err);
+      if(!contact) return next();
+      res.view({
+        contact: contact
+      });
+    });
+  },
   update: function(req, res) {
     res.send(validate(req.body, 'update'));
   },
