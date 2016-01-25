@@ -26,8 +26,8 @@ describe('ContactsController', function() {
     describe('with missing params', function() {
       it('should return an error if contact name is missing', function (done) {
         var missingContactName = { name: '', number: '12345' },
-          expectedResult = 'Missing contact name';
-        execRequest(missingContactName, expectedResult, 'json', done);
+          expectedResult = {status: false, message: 'Missing contact name'};
+        execRequest(missingContactName, expectedResult, {contentType: 'json', status: 200}, done);
       });
 
       it('should return an error if contact number is missing', function (done) {
