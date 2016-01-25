@@ -34,7 +34,10 @@
                 <td class="text-center">
                   <a class="btn btn-info btn-sm" href="/contact/show/<%= contact.id %>">VIEW</a>
                   <a class="btn btn-success btn-sm" href="/contact/edit/<%= contact.id %>">EDIT</a>
-                  <a class="btn btn-danger btn-sm" href="/contact/edit/<%= contact.id %>">DELETE</a>
+                  <form style="display: inline-block" action="/contact/destroy/<%= contact.id %>" method="POST">
+                    <input type="hidden" name="_method" value="delete">
+                    <input type="submit" class="btn btn-danger btn-sm" value="DELETE">
+                  </form>
                 </td>
               </tr>
             <% }) %>
