@@ -36,7 +36,7 @@ module.exports = {
       });
     });
   },
-  create: function (req, res) {
+  create: function (req, res, next) {
     var validationResult = validate(req.body, 'create');
     if(!validationResult.status)
       return res.send(validationResult);
@@ -46,13 +46,13 @@ module.exports = {
       res.redirect("/contact");
     });
   },
-  find: function(req, res) {
+  find: function(req, res, next) {
     res.send(validate(req.params, 'find'));
   },
-  findOne: function(req, res) {
+  findOne: function(req, res, next) {
     res.send(validate(req.params, 'findOne'));
   },
-  show: function(req, res) {
+  show: function(req, res, next) {
     Contact.findOne(req.params['id'], function(err, contact) {
       if(err) return next(err);
       if(!contact) return next();
@@ -61,7 +61,7 @@ module.exports = {
       });
     });
   },
-  edit: function(req, res) {
+  edit: function(req, res, next) {
     Contact.findOne(req.params['id'], function(err, contact) {
       if(err) return next(err);
       if(!contact) return next();
@@ -70,10 +70,10 @@ module.exports = {
       });
     });
   },
-  update: function(req, res) {
+  update: function(req, res, next) {
     res.send(validate(req.body, 'update'));
   },
-  destroy: function(req, res) {
+  destroy: function(req, res, next) {
     res.send(validate(req.params, 'destroy'));
   }
 };
