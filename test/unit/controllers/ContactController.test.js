@@ -88,23 +88,20 @@ describe('ContactsController', function() {
 
   describe('#get()', function() {
 
-    function execRequest(targetUrl, expectedResult, done) {
+    function execRequest(targetUrl, done) {
       request(sails.hooks.http.app)
         .get(targetUrl)
         .expect('Content-Type', /text/)
-        .expect(STATUS_SUCCESS)
-        .expect(expectedResult, done);
+        .expect(STATUS_SUCCESS, done)
     }
 
     describe('with valid param', function() {
-      it('should return a success message if ALL contact has been retrieved', function (done) {
-        expectedResult = 'All contacts retrieved!';
-        execRequest('/contact', expectedResult, done);
+      it('should render the get all contacts page', function (done) {
+        execRequest('/contact', done);
       });
 
-      it('should return a success message if ONE contact has been retrieved', function (done) {
-        expectedResult = 'One contact retrieved!';
-        execRequest('/contact/1', expectedResult, done);
+      it('should render the edit page containing the user queried', function (done) {
+        execRequest('/contact/1', done);
       });
     });
 
