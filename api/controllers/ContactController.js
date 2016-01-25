@@ -2,15 +2,15 @@ function validate(param, action) {
 
   // Use defined obj to handle (default) positive messages
   var successObj = {
-    save: 'Contact saved!',
+    create: 'Contact saved!',
     update: 'Contact updated!',
     destroy: 'Contact deleted!',
-    getAll: 'All contacts retrieved!',
-    getOne: 'One contact retrieved!',
+    find: 'All contacts retrieved!',
+    findOne: 'One contact retrieved!',
   },
     returnValue = successObj[action];
 
-  if(action === 'save' || action === 'update') {
+  if(action === 'create' || action === 'update') {
     if(!param.contact_name && !param.contact_num)
       returnValue = "Missing contact details";
     else if(!param.contact_name)
@@ -24,14 +24,14 @@ function validate(param, action) {
 }
 
 module.exports = {
-  save: function (req, res) {
-    res.send(validate(req.body, 'save'));
+  create: function (req, res) {
+    res.send(validate(req.body, 'create'));
   },
-  getAll: function(req, res) {
-    res.send(validate(req.params, 'getAll'));
+  find: function(req, res) {
+    res.send(validate(req.params, 'find'));
   },
-  getOne: function(req, res) {
-    res.send(validate(req.params, 'getOne'));
+  findOne: function(req, res) {
+    res.send(validate(req.params, 'findOne'));
   },
   update: function(req, res) {
     res.send(validate(req.body, 'update'));
