@@ -2,11 +2,11 @@
   <div class="jumbotron row" style="margin-top: 30px">
     <img class="col-md-2" src="/images/default_avatar.png">
     <div class="col-md-9" style="display: inline-block; vertical-align: top">
-      <h2 style="margin: 0"> <%= user.name %> </h2>
-      <h5 style="margin: 0"> <%= user.number %> </h5>
+      <h2 style="margin: 0"> <%= contact.name %> </h2>
+      <h5 style="margin: 0"> <%= contact.number %> </h5>
       <br><br><br>
-      <a class="btn btn-success btn-sm" href="/contact/edit/<%= user.id %>">Edit Info</a>
-      <form style="display: inline-block" action="/contact/<%= user.id %>" method="post">
+      <a class="btn btn-success btn-sm" href="/contact/edit/<%= contact.id %>">Edit Info</a>
+      <form style="display: inline-block" action="/contact/<%= contact.id %>" method="post">
         <input type="submit" class="btn btn-danger btn-sm" value="Delete">
       </form>
     </div>
