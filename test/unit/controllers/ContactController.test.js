@@ -6,40 +6,40 @@ describe('ContactsController', function() {
 
   describe('#save()', function() {
 
-    function execRequest(param, expectedResult, done) {
+    function execRequest(param, expectedResult, headers, done) {
       request(sails.hooks.http.app)
-      .post('/contact')
+      .post('/contact/create')
       .send(param)
-      .expect('Content-Type', /text/)
-      .expect(STATUS_SUCCESS)
+      .expect('Content-Type', new RegExp(headers.contentType))
+      .expect(headers.status)
       .expect(expectedResult, done);
     }
 
     describe('with valid params', function() {
       it('should return a success message after contact creation', function (done) {
-        var validParam = { contact_name: 'test', contact_num: '123' },
-          expectedResult = 'Contact saved!';
-        execRequest(validParam, expectedResult, done);
+        var validParam = { name: 'test', number: '123' },
+          expectedResult = 'Found. Redirecting to /contact';
+        execRequest(validParam, expectedResult, {contentType: 'text', status: 302}, done);
       });
     });
 
     describe('with missing params', function() {
       it('should return an error if contact name is missing', function (done) {
-        var missingContactName = { contact_name: '', contact_num: '12345' },
+        var missingContactName = { name: '', number: '12345' },
           expectedResult = 'Missing contact name';
-        execRequest(missingContactName, expectedResult, done);
+        execRequest(missingContactName, expectedResult, 'json', done);
       });
 
       it('should return an error if contact number is missing', function (done) {
-        var missingContactNumber = { contact_name: 'Joe Joey', contact_num: '' },
+        var missingContactNumber = { name: 'Joe Joey', number: '' },
           expectedResult = 'Missing contact number';
-        execRequest(missingContactNumber, expectedResult, done);
+        execRequest(missingContactNumber, expectedResult, 'json', done);
       });
 
       it('should return an error if contact name and number are missing', function (done) {
-        var missingContact = { contact_name: '', contact_num: '' },
+        var missingContact = { name: '', number: '' },
           expectedResult = 'Missing contact details';
-        execRequest(missingContact, expectedResult, done);
+        execRequest(missingContact, expectedResult, 'json', done);
       });
     });
 
