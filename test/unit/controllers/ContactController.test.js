@@ -112,15 +112,15 @@ describe('ContactsController', function() {
 
     function execRequest(expectedResult, done) {
       request(sails.hooks.http.app)
-        .delete('/contact/1')
+        .delete('/contact/3')
         .expect('Content-Type', /text/)
-        .expect(STATUS_SUCCESS)
+        .expect(302)
         .expect(expectedResult, done);
     }
 
     describe('with valid param', function() {
       it('should return a success message after contact deletion', function (done) {
-        expectedResult = 'Contact deleted!';
+        expectedResult = 'Found. Redirecting to /contact';
         execRequest(expectedResult, done);
       });
     });

@@ -83,6 +83,17 @@ module.exports = {
     });
   },
   destroy: function(req, res, next) {
-    res.send(validate(req.params, 'destroy'));
+    var paramID = req.params['id'];
+    Contact.findOne(paramID, function(errFind, contact) {
+      if(errFind) return next(errFind);
+      if(!contact) return next();
+
+      Contact.destroy(paramID, function(errDestroy) {
+        if(errDestroy) return next(errDestroy);
+      });
+
+      res.redirect("/contact");
+
+    });
   }
 };
