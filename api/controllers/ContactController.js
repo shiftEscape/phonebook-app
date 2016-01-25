@@ -33,6 +33,16 @@ module.exports = {
   findOne: function(req, res) {
     res.send(validate(req.params, 'findOne'));
   },
+  show: function(req, res) {
+    //res.send(validate(req.params, 'findOne'));
+    Contact.findOne(req.params['id'], function(err, user) {
+      if(err) return next(err);
+      if(!user) return next();
+      res.view({
+        user: user
+      });
+    });
+  },
   update: function(req, res) {
     res.send(validate(req.body, 'update'));
   },
