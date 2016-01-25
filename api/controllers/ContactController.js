@@ -37,7 +37,14 @@ module.exports = {
     });
   },
   create: function (req, res) {
-    res.send(validate(req.body, 'create'));
+    var validationResult = validate(req.body, 'create');
+    if(!validationResult.status)
+      return res.send(validationResult);
+
+    Contact.create(req.params.all(), function(err, createdUser) {
+      if(err) return next(err);
+      res.redirect("/contact");
+    });
   },
   find: function(req, res) {
     res.send(validate(req.params, 'find'));
