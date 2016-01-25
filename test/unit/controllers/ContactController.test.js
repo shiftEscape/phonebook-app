@@ -38,8 +38,8 @@ describe('ContactsController', function() {
 
       it('should return an error if contact name and number are missing', function (done) {
         var missingContact = { name: '', number: '' },
-          expectedResult = 'Missing contact details';
-        execRequest(missingContact, expectedResult, 'json', done);
+          expectedResult = {status: false, message: 'Missing contact details'};
+        execRequest(missingContact, expectedResult, {contentType: 'json', status: 200}, done);
       });
     });
 
