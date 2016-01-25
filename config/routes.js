@@ -33,7 +33,7 @@ module.exports.routes = {
   ***************************************************************************/
 
   '/': {
-    view: 'contact/index'
+    view: 'static/home'
   },
   'POST /contact': 'ContactController.save',
   'GET /contact': 'ContactController.getAll',
