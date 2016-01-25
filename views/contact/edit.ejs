@@ -1,0 +1,12 @@
+<div class="container">
+  <div class="jumbotron row" style="margin-top: 30px">
+    <img class="col-md-2" src="/images/default_avatar.png">
+    <div class="col-md-5" style="display: inline-block; vertical-align: top">
+      <input type="text" placeholder="New contact name.." class="form-control input-lg" name="contact_name" value="<%= contact.name %>">
+      <input type="text" placeholder="New contact number.." style="margin: 5px 0 0 0" class="form-control input-lg" name="contact_name" value="<%= contact.number %>">
+      <br>
+      <a class="btn btn-success btn-sm" href="/contact/edit/<%= contact.id %>">Save</a>
+      <a class="btn btn-danger btn-sm" href="/contact">Cancel</a>
+    </div>
+  </div>
+</div>
