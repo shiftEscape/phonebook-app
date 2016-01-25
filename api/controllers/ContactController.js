@@ -53,12 +53,11 @@ module.exports = {
     res.send(validate(req.params, 'findOne'));
   },
   show: function(req, res) {
-    //res.send(validate(req.params, 'findOne'));
-    Contact.findOne(req.params['id'], function(err, user) {
+    Contact.findOne(req.params['id'], function(err, contact) {
       if(err) return next(err);
-      if(!user) return next();
+      if(!contact) return next();
       res.view({
-        user: user
+        contact: contact
       });
     });
   },
