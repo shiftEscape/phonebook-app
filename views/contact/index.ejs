@@ -1,21 +1,46 @@
-<div class="container">
-    <div class="jumbotron">
-        <h1 align="center">Phonebook Application</h1>
-        <br>
-        <div id="todo-form" class="row">
-            <div class="col-sm-8 col-sm-offset-2 text-center">
-                <form class="form-inline" action='/contact' method='POST'>
-                    <div class="form-group">
-                      <input type="text" name="contact_name" class="form-control input-md text-center" style="width: 350px" placeholder="Name..">
-                      <input type="text" name="contact_num" class="form-control input-md text-center" style="width: 210px" placeholder="Contact Number..">
-                      <button type="submit" class="btn btn-primary btn-md">Create</button>
-                    </div>
-                </form>
+<div class="container" style="margin-top: 30px">
+  <div class="jumbotron">
+    <h2>Manage Contacts</h2>
+    <hr>
+    <div id="todo-form" class="row">
+      <div class="col-sm-12">
+          <form class="form-inline" action='/contact/create' method='POST'>
+            <div class="form-group">
+              <input type="text" name="contact_name" class="form-control input-md text-center" style="width: 350px" placeholder="Name..">
+              <input type="text" name="contact_num" class="form-control input-md text-center" style="width: 210px" placeholder="Contact Number..">
+              <button type="submit" class="btn btn-primary btn-md">Create</button>
             </div>
-        </div>
+          </form>
+      </div>
     </div>
-    <div id="todo-list" class="row">
-        <div class="col-sm-4 col-sm-offset-4">
-        </div>
+    <br>
+    <br>
+    <div id="contact-list" class="row">
+      <div class="col-sm-12">
+        <table class="table">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Contact Name</th>
+              <th>Contact Number</th>
+              <th class="text-center">Actions</th>
+          </thead>
+          <tbody class="table-striped">
+            <% _.each(contacts, function(contact) { %>
+              <tr data-id="<%= contact.id %>" data-model="contact">
+                <td><%= contact.id %></td>
+                <td><%= contact.name %></td>
+                <td><%= contact.number %></td>
+                <td class="text-center">
+                  <a class="btn btn-info btn-sm" href="/contact/show/<%= contact.id %>">VIEW</a>
+                  <a class="btn btn-success btn-sm" href="/contact/edit/<%= contact.id %>">EDIT</a>
+                  <a class="btn btn-danger btn-sm" href="/contact/edit/<%= contact.id %>">DELETE</a>
+                </td>
+              </tr>
+            <% }) %>
+          </tbody>
+        </table>
+      </div>
     </div>
+  </div>
 </div>
