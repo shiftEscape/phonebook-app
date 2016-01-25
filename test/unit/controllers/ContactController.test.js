@@ -32,8 +32,8 @@ describe('ContactsController', function() {
 
       it('should return an error if contact number is missing', function (done) {
         var missingContactNumber = { name: 'Joe Joey', number: '' },
-          expectedResult = 'Missing contact number';
-        execRequest(missingContactNumber, expectedResult, 'json', done);
+          expectedResult = {status: false, message: 'Missing contact number'};
+        execRequest(missingContactNumber, expectedResult, {contentType: 'json', status: 200}, done);
       });
 
       it('should return an error if contact name and number are missing', function (done) {
