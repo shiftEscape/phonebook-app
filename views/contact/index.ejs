@@ -4,6 +4,11 @@
     <hr>
     <div id="todo-form" class="row">
       <div class="col-sm-12">
+          <% if(flash && flash.err) { %>
+            <div class="alert alert-danger">
+              <strong>Oops!</strong>&nbsp;<%= flash.err %>. Please check missing fields and try again.
+            </div>
+          <% } %>
           <form class="form-inline" action='/contact/create' method='POST'>
             <div class="form-group">
               <input type="text" name="name" class="form-control input-md text-center" style="width: 350px" placeholder="Name..">
